@@ -18,6 +18,7 @@ input.onPinPressed(TouchPin.P2, function () {
 })
 input.onGesture(Gesture.Shake, function () {
     strip.clear()
+    DFPlayerPro.MP3_control(DFPlayerPro.ControlType.playPause)
 })
 input.onButtonPressed(Button.B, function () {
     strip.showColor(neopixel.colors(NeoPixelColors.Green))
