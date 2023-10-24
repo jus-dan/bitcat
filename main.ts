@@ -1,12 +1,12 @@
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    DFPlayerPro.MP3_playFilePathName("1.mp3")
+    DFPlayerPro.MP3_playFilePathName("start.mp3")
 })
 input.onButtonPressed(Button.A, function () {
     strip.showRainbow(1, 360)
     strip.show()
 })
 input.onPinPressed(TouchPin.P2, function () {
-    DFPlayerPro.MP3_playFilePathName("2.mp3")
+    DFPlayerPro.MP3_playFilePathName("riff.mp3")
     basic.showLeds(`
         . . # . .
         . . . # .
@@ -19,14 +19,13 @@ input.onPinPressed(TouchPin.P2, function () {
 })
 input.onGesture(Gesture.Shake, function () {
     strip.clear()
-    DFPlayerPro.MP3_control(DFPlayerPro.ControlType.playPause)
 })
 input.onButtonPressed(Button.B, function () {
     strip.showColor(neopixel.colors(NeoPixelColors.Green))
     strip.show()
 })
 input.onPinPressed(TouchPin.P1, function () {
-    DFPlayerPro.MP3_playFilePathName("3.mp3")
+    DFPlayerPro.MP3_playFilePathName("miau.mp3")
     basic.showLeds(`
         . . # . .
         . # . . .
@@ -52,6 +51,7 @@ strip = neopixel.create(DigitalPin.P9, 6, NeoPixelMode.RGB)
 strip.setBrightness(60)
 animate = 0
 booted = 1
+DFPlayerPro.MP3_playFilePathName("startup.mp3")
 basic.showLeds(`
     . . . . .
     # . . . #
