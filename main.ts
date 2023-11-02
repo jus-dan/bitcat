@@ -1,6 +1,29 @@
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
     DFPlayerPro.MP3_playFilePathName("start.mp3")
 })
+function Starte () {
+    basic.clearScreen()
+    booted = 0
+    basic.showIcon(IconNames.No)
+    music.setVolume(255)
+    DFPlayerPro.MP3_setSerial(SerialPin.P16, SerialPin.P8)
+    DFPlayerPro.MP3_ledMode(DFPlayerPro.ledType.ledOff)
+    DFPlayerPro.MP3_setPlayMode(DFPlayerPro.PlayType.playOneSongAndPause)
+    lautstärke = 10
+    DFPlayerPro.MP3_setVol(lautstärke)
+    strip = neopixel.create(DigitalPin.P9, 7, NeoPixelMode.RGB)
+    strip.setBrightness(60)
+    animate = 0
+    booted = 1
+    DFPlayerPro.MP3_playFilePathName("startup.mp3")
+    basic.showLeds(`
+        . . . . .
+        # . . . #
+        # # # # #
+        . # # # .
+        . . . . .
+        `)
+}
 input.onButtonPressed(Button.A, function () {
     strip.showRainbow(1, 360)
     strip.show()
@@ -19,6 +42,10 @@ input.onPinPressed(TouchPin.P2, function () {
 })
 input.onGesture(Gesture.Shake, function () {
     strip.clear()
+    basic.clearScreen()
+})
+input.onButtonPressed(Button.AB, function () {
+    Starte()
 })
 input.onButtonPressed(Button.B, function () {
     strip.showColor(neopixel.colors(NeoPixelColors.Green))
@@ -39,34 +66,9 @@ input.onPinPressed(TouchPin.P1, function () {
 let temp = 0
 let animate = 0
 let strip: neopixel.Strip = null
+let lautstärke = 0
 let booted = 0
-basic.showIcon(IconNames.No)
-music.setVolume(255)
-DFPlayerPro.MP3_setSerial(SerialPin.P16, SerialPin.P8)
-DFPlayerPro.MP3_ledMode(DFPlayerPro.ledType.ledOff)
-DFPlayerPro.MP3_setPlayMode(DFPlayerPro.PlayType.playOneSongAndPause)
-let lautstärke = 10
-DFPlayerPro.MP3_setVol(lautstärke)
-strip = neopixel.create(DigitalPin.P9, 6, NeoPixelMode.RGB)
-strip.setBrightness(60)
-animate = 0
-booted = 1
-DFPlayerPro.MP3_playFilePathName("startup.mp3")
-basic.showLeds(`
-    . . . . .
-    # . . . #
-    # # # # #
-    . # # # .
-    . . . . .
-    `)
-basic.forever(function () {
-    temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 30))
-    if (temp != lautstärke) {
-        lautstärke = temp
-        DFPlayerPro.MP3_setVol(lautstärke)
-    }
-    basic.pause(50)
-})
+Starte()
 basic.forever(function () {
     if (booted == 1) {
         strip.rotate(1)
@@ -94,4 +96,12 @@ basic.forever(function () {
         }
         animate = 0
     }
+})
+basic.forever(function () {
+    temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 20))
+    if (temp != lautstärke) {
+        lautstärke = temp
+        DFPlayerPro.MP3_setVol(lautstärke)
+    }
+    basic.pause(50)
 })
