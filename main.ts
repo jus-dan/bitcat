@@ -70,6 +70,14 @@ let lautstärke = 0
 let booted = 0
 Starte()
 basic.forever(function () {
+    temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 20))
+    if (temp != lautstärke) {
+        lautstärke = temp
+        DFPlayerPro.MP3_setVol(lautstärke)
+    }
+    basic.pause(50)
+})
+basic.forever(function () {
     if (booted == 1) {
         strip.rotate(1)
         strip.show()
@@ -96,12 +104,4 @@ basic.forever(function () {
         }
         animate = 0
     }
-})
-basic.forever(function () {
-    temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 20))
-    if (temp != lautstärke) {
-        lautstärke = temp
-        DFPlayerPro.MP3_setVol(lautstärke)
-    }
-    basic.pause(50)
 })
