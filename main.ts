@@ -1,13 +1,12 @@
 input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    DFPlayerPro.MP3_playFilePathName("start.mp3")
+	
 })
 function Starte () {
     basic.clearScreen()
     booted = 0
-    basic.showIcon(IconNames.No)
-    music.setVolume(255)
     DFPlayerPro.MP3_setSerial(SerialPin.P16, SerialPin.P8)
     DFPlayerPro.MP3_ledMode(DFPlayerPro.ledType.ledOff)
+    DFPlayerPro.MP3_promtMode(DFPlayerPro.PromtType.promtOff)
     DFPlayerPro.MP3_setPlayMode(DFPlayerPro.PlayType.playOneSongAndPause)
     lautstärke = 10
     DFPlayerPro.MP3_setVol(lautstärke)
@@ -15,7 +14,6 @@ function Starte () {
     strip.setBrightness(60)
     animate = 0
     booted = 1
-    DFPlayerPro.MP3_playFilePathName("startup.mp3")
     basic.showLeds(`
         . . . . .
         # . . . #
@@ -29,7 +27,6 @@ input.onButtonPressed(Button.A, function () {
     strip.show()
 })
 input.onPinPressed(TouchPin.P2, function () {
-    DFPlayerPro.MP3_playFilePathName("riff.mp3")
     basic.showLeds(`
         . . # . .
         . . . # .
@@ -39,6 +36,7 @@ input.onPinPressed(TouchPin.P2, function () {
         `)
     basic.clearScreen()
     animate = 1
+    DFPlayerPro.MP3_playFilePathName("dog.mp3")
 })
 input.onGesture(Gesture.Shake, function () {
     strip.clear()
@@ -52,7 +50,6 @@ input.onButtonPressed(Button.B, function () {
     strip.show()
 })
 input.onPinPressed(TouchPin.P1, function () {
-    DFPlayerPro.MP3_playFilePathName("miau.mp3")
     basic.showLeds(`
         . . # . .
         . # . . .
@@ -62,6 +59,7 @@ input.onPinPressed(TouchPin.P1, function () {
         `)
     basic.clearScreen()
     animate = 1
+    DFPlayerPro.MP3_playFilePathName("cat.mp3")
 })
 let temp = 0
 let animate = 0
