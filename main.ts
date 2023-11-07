@@ -27,6 +27,7 @@ input.onButtonPressed(Button.A, function () {
     strip.show()
 })
 input.onPinPressed(TouchPin.P2, function () {
+    DFPlayerPro.MP3_playFilePathName("dog.mp3")
     basic.showLeds(`
         . . # . .
         . . . # .
@@ -36,7 +37,6 @@ input.onPinPressed(TouchPin.P2, function () {
         `)
     basic.clearScreen()
     animate = 1
-    DFPlayerPro.MP3_playFilePathName("dog.mp3")
 })
 input.onGesture(Gesture.Shake, function () {
     strip.clear()
@@ -50,6 +50,7 @@ input.onButtonPressed(Button.B, function () {
     strip.show()
 })
 input.onPinPressed(TouchPin.P1, function () {
+    DFPlayerPro.MP3_playFilePathName("cat.mp3")
     basic.showLeds(`
         . . # . .
         . # . . .
@@ -59,13 +60,13 @@ input.onPinPressed(TouchPin.P1, function () {
         `)
     basic.clearScreen()
     animate = 1
-    DFPlayerPro.MP3_playFilePathName("cat.mp3")
 })
 let temp = 0
 let animate = 0
 let strip: neopixel.Strip = null
 let lautstärke = 0
 let booted = 0
+basic.pause(1000)
 Starte()
 basic.forever(function () {
     temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 20))
