@@ -4,6 +4,7 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 function Starte () {
     basic.clearScreen()
     booted = 0
+    basic.pause(500)
     DFPlayerPro.MP3_setSerial(SerialPin.P16, SerialPin.P8)
     DFPlayerPro.MP3_ledMode(DFPlayerPro.ledType.ledOff)
     DFPlayerPro.MP3_promtMode(DFPlayerPro.PromtType.promtOff)
@@ -66,7 +67,6 @@ let animate = 0
 let strip: neopixel.Strip = null
 let lautstärke = 0
 let booted = 0
-basic.pause(1000)
 Starte()
 basic.forever(function () {
     temp = Math.round(Math.map(pins.analogReadPin(AnalogPin.P0), 0, 1023, 0, 20))
